@@ -21,7 +21,7 @@ export default async function handler(req, res) {
   try {
     await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
-      to: process.env.CONTACT_TO_EMAIL,
+      to: "anything@keindal.resend.app",
       reply_to: email,
       subject: `New message from ${name}`,
       text: `
