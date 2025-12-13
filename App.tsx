@@ -121,7 +121,7 @@ export function App() {
               <div className={`w-8 h-8 border-2 flex items-center justify-center transition-all duration-300 group-hover:rotate-12 ${theme === 'overworld' ? 'bg-green-600 border-green-800 hover:bg-green-500' : 'bg-red-700 border-red-900 hover:bg-red-600'}`}>
                  <span className="font-bold text-lg">S</span>
               </div>
-              <span className="text-2xl tracking-widest text-yellow-400 drop-shadow-md group-hover:scale-105 transition-transform duration-200">AYUSHDEEP.DEV</span>
+              <span className="text-2xl tracking-widest text-yellow-400 drop-shadow-md group-hover:scale-105 transition-transform duration-200">AYUSHDEEP.SPACE</span>
             </div>
             
             <div className="hidden md:flex items-center gap-6">
