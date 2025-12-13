@@ -59,17 +59,45 @@ export function App() {
     'Tools': SKILLS.filter(s => s.category === 'Tools'),
   };
 
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus('submitting');
-    // Simulate API call
-    setTimeout(() => {
-      setFormStatus('success');
-      triggerAchievement('Getting an Upgrade', <Pickaxe className="text-white" />);
-      // Reset after 3 seconds
-      setTimeout(() => setFormStatus('idle'), 5000);
-    }, 1500);
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  if (formStatus === "submitting") return;
+  setFormStatus("submitting");
+
+  const form = e.currentTarget;
+  const data = new FormData(form);
+
+  const payload = {
+    name: data.get("name"),
+    email: data.get("email"),
+    message: data.get("message"),
   };
+
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) throw new Error("Request failed");
+
+    setFormStatus("success");
+    triggerAchievement(
+      "Getting an Upgrade",
+      <Pickaxe className="text-white" />
+    );
+
+    form.reset();
+
+    setTimeout(() => setFormStatus("idle"), 5000);
+  } catch (err) {
+    console.error("Contact submit failed:", err);
+    setFormStatus("error");
+  }
+};
+
 
   return (
     <div className={`min-h-screen text-white selection:bg-green-500 selection:text-black relative overflow-x-hidden transition-colors duration-1000 ${theme === 'overworld' ? 'bg-dirt' : 'bg-nether'}`}>
@@ -352,6 +380,7 @@ export function App() {
                      required
                      type="text" 
                      id="name"
+                     name="name"
                      className="w-full bg-transparent border-b-2 border-[#5c4033] focus:border-red-500 focus:outline-none text-xl p-2 font-['VT323'] placeholder-[#a1887f] transition-colors focus:bg-[#e6d0a1] bg-opacity-30"
                      placeholder="Steve"
                    />
@@ -363,6 +392,7 @@ export function App() {
                      required
                      type="email" 
                      id="email"
+                      name="email"
                      className="w-full bg-transparent border-b-2 border-[#5c4033] focus:border-red-500 focus:outline-none text-xl p-2 font-['VT323'] focus:bg-[#e6d0a1] bg-opacity-30"
                      placeholder="herobrine@minecraft.net"
                    />
@@ -373,6 +403,7 @@ export function App() {
                    <textarea 
                      required
                      id="message"
+                     name="message"
                      rows={4}
                      className="w-full bg-transparent border-2 border-[#5c4033] focus:border-red-500 focus:outline-none text-xl p-2 font-['VT323'] resize-none focus:bg-[#e6d0a1] bg-opacity-30"
                      placeholder="Write your message here..."
