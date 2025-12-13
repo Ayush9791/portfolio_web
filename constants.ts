@@ -1,10 +1,10 @@
 import { Project, Skill } from './types';
 
 export const PROFILE = {
-  imageUrl: "public/pfp.png",
+  imageUrl: "/pfp.png",
 };
 
-export const MUSIC_URL = "public/minecraft.mp3";
+export const MUSIC_URL = "/minecraft.mp3";
 
 export const PROJECTS: Project[] = [
   {
