@@ -51,7 +51,7 @@ export const BackgroundMusic: React.FC = () => {
       `}>
         <div className="bg-[#212121] border-2 border-white text-yellow-400 p-2 font-['VT323'] text-lg shadow-md flex items-center gap-2 mb-2">
            <Music size={16} className="animate-bounce" />
-           <span>Now Playing: C418 - Style</span>
+           <span>Now Playing: C418</span>
         </div>
       </div>
 
