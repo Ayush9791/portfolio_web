@@ -104,6 +104,7 @@ export function App() {
       
       <ClickParticles />
       <BackgroundMusic />
+      <ExperienceOrbs key={theme} theme={theme} />
 
       {achievement && (
         <AchievementToast 
@@ -183,12 +184,8 @@ export function App() {
       </nav>
 
       {/* Hero Section */}
-      <section id="about" className="pt-32 pb-20 px-4 flex flex-col items-center justify-center min-h-[90vh] text-center relative overflow-hidden">
-        {theme === 'overworld' ? <ExperienceOrbs /> : (
-          /* Nether Particles / Ash could go here, for now using ExperienceOrbs styled differently could work, or just let them be standard */
-          <div className="absolute inset-0 pointer-events-none opacity-20 bg-repeat animate-pulse" style={{backgroundImage: 'radial-gradient(circle, #ff0000 1px, transparent 1px)', backgroundSize: '40px 40px'}}></div>
-        )}
-        
+      <section id="about" className="pt-32 pb-20 px-4 flex flex-col items-center justify-center min-h-[90vh] text-center relative ">
+      
         {/* Decorative blocks */}
         <div className={`absolute top-40 left-10 w-16 h-16 border-4 rotate-12 opacity-50 hidden md:block animate-float ${theme === 'overworld' ? 'bg-[#588d3e] border-[#3e662b]' : 'bg-[#8b0000] border-[#500000]'}`} style={{ animationDelay: '0s' }}></div>
         <div className={`absolute bottom-20 right-10 w-24 h-24 border-4 -rotate-6 opacity-50 hidden md:block animate-float ${theme === 'overworld' ? 'bg-[#7d7d7d] border-[#555]' : 'bg-[#4a0e0e] border-[#2a0505]'}`} style={{ animationDelay: '1.5s' }}></div>
@@ -292,7 +289,7 @@ export function App() {
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
              <h2 className={`text-5xl inline-block border-4 border-black px-8 py-2 text-white shadow-[8px_8px_0_rgba(0,0,0,0.5)] transform rotate-1 hover:rotate-0 transition-transform duration-300 cursor-default ${theme === 'overworld' ? 'bg-[#588d3e]' : 'bg-[#800000]'}`}>
-              Achievements
+              Quests
             </h2>
           </div>
 

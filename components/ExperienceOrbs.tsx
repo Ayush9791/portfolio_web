@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { BackgroundMusic } from './BackgroundMusic';
 
 interface Orb {
   id: number;
@@ -8,7 +9,10 @@ interface Orb {
   size: number;
 }
 
-export const ExperienceOrbs: React.FC = () => {
+export const ExperienceOrbs: React.FC<{ theme: 'overworld' | 'nether' }> = ({ theme }) => {
+  const colors = theme === 'overworld'
+    ? { bg: '#a8f331', border: '#7aaf22', glow: '#ccf978' }
+    : { bg: '#ff6f61', border: '#cc4a39', glow: '#ff9b94' };
   const [orbs, setOrbs] = useState<Orb[]>([]);
 
   useEffect(() => {
@@ -24,7 +28,7 @@ export const ExperienceOrbs: React.FC = () => {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none select-none z-0">
       {orbs.map((orb) => (
         <div
           key={orb.id}
@@ -34,9 +38,11 @@ export const ExperienceOrbs: React.FC = () => {
             width: `${orb.size}px`,
             height: `${orb.size}px`,
             bottom: '50px',
+            backgroundColor: colors.bg,
+            border: `2px solid ${colors.border}`,
             animation: `orb-float ${orb.animationDuration}s linear infinite`,
             animationDelay: `${orb.delay}s`,
-            boxShadow: '0 0 10px #ccf978'
+            boxShadow: `0 0 10px ${colors.glow}`,
           }}
         />
       ))}
