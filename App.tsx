@@ -13,7 +13,7 @@ type Theme = 'overworld' | 'nether';
 
 export function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [projectFilter, setProjectFilter] = useState<'All' | 'AI' | 'Web'>('All');
+  const [projectFilter, setProjectFilter] = useState<'All' | 'ACTIVE QUEST' | 'FINISHED'>('All');
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [theme, setTheme] = useState<Theme>('overworld');
   const [achievement, setAchievement] = useState<{ title: string; icon: React.ReactNode } | null>(null);
@@ -295,7 +295,7 @@ export function App() {
 
           {/* Filter Tabs */}
           <div className="flex justify-center mb-12 gap-4">
-             {['All', 'AI', 'Web'].map((filter) => (
+             {['All', 'ACTIVE QUEST', 'FINISHED'].map((filter) => (
                <button
                  key={filter}
                  onClick={() => setProjectFilter(filter as any)}
@@ -315,6 +315,7 @@ export function App() {
             {filteredProjects.map((project) => (
               <div key={project.id} className="bg-[#c6c6c6] p-1 border-4 border-black shadow-[8px_8px_0_rgba(0,0,0,0.5)] hover:transform hover:-translate-y-2 hover:shadow-[12px_12px_0_rgba(0,0,0,0.5)] transition-all duration-300 animate-in fade-in zoom-in-95">
                 <div className="border-4 border-[#ffffff] border-b-[#555555] border-r-[#555555] p-6 h-full flex flex-col">
+          
                   <div className="relative mb-6 group overflow-hidden border-4 border-black bg-black">
                     <img 
                       src={project.imageUrl} 
@@ -325,7 +326,13 @@ export function App() {
                       {project.type}
                     </div>
                   </div>
-                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.badge.map((badge, i) => (
+                      <span key={i} className="text-xs px-2 py-1 bg-[#555555] text-black border-2 border-[#333333] hover:bg-white transition-colors cursor-default inline-block">
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
                   <h3 className="text-3xl text-black mb-3 font-bold group-hover:text-blue-800 transition-colors">{project.title}</h3>
                   <p className="text-[#333] text-xl mb-6 flex-grow leading-tight">
                     {project.description}
@@ -390,7 +397,7 @@ export function App() {
                      type="email" 
                      id="email"
                       name="email"
-                     className="w-full bg-transparent border-b-2 border-[#5c4033] focus:border-red-500 focus:outline-none text-xl p-2 font-['VT323'] focus:bg-[#e6d0a1] bg-opacity-30"
+                     className="w-full bg-transparent border-b-2 border-[#5c4033] focus:border-red-500 focus:outline-none text-xl p-2 font-['VT323'] placeholder-[#a1887f] transition-colors focus:bg-[#e6d0a1] bg-opacity-30"
                      placeholder="herobrine@minecraft.net"
                    />
                  </div>
@@ -402,7 +409,7 @@ export function App() {
                      id="message"
                      name="message"
                      rows={4}
-                     className="w-full bg-transparent border-2 border-[#5c4033] focus:border-red-500 focus:outline-none text-xl p-2 font-['VT323'] resize-none focus:bg-[#e6d0a1] bg-opacity-30"
+                     className="w-full bg-transparent border-b-2 border-[#5c4033] focus:border-red-500 focus:outline-none text-xl p-2 font-['VT323'] placeholder-[#a1887f] transition-colors focus:bg-[#e6d0a1] bg-opacity-30"
                      placeholder="Write your message here..."
                    ></textarea>
                  </div>

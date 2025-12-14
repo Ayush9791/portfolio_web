@@ -9,12 +9,13 @@ export const MUSIC_URL = "/minecraft.mp3";
 export const PROJECTS: Project[] = [
   {
     id: 1,
+    badge: ["AI","Active Quest"],
     title: "Surakshan: AI-Powered accident detection and response system",
     description: "An AI-driven system that detects road accidents in real-time using computer vision and notifies emergency services automatically.",
     tags: ["Python", "TensorFlow", "OpenCV"],
     imageUrl: "https://picsum.photos/400/300?random=1",
     link: "https://github.com/Ayush9791/Surakshan-Accident-Detection-and-Reporting-System",
-    type: "AI"
+    type: "ACTIVE QUEST",
   },
   
 ];

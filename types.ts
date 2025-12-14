@@ -1,11 +1,12 @@
 export interface Project {
   id: number;
+  badge: string[];
   title: string;
   description: string;
   tags: string[];
   imageUrl: string;
   link: string;
-  type: 'AI' | 'Web';
+  type: 'ACTIVE QUEST' | 'FINISHED';
 }
 
 export interface Skill {
