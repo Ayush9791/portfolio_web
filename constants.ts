@@ -24,7 +24,7 @@ export const PROJECTS: Project[] = [
     description: "A multifunctional Discord bot built with discord.py, featuring moderation tools, fun commands, and music playback capabilities.",
     tags: ["discord.py", "Python"],
     imageUrl: "https://picsum.photos/400/300?random=2",
-    link: "",
+    link: "https://github.com/Ayush9791/Grizzy",
     type: 'FINISHED',
   },
   {
@@ -48,6 +48,26 @@ export const PROJECTS: Project[] = [
     link: "",
     type: 'ACTIVE QUEST',
   },
+  {
+    id: 5,
+    badge: ["AI", "Finished"],
+    title: "CNN based lung cancer detection",
+    description: "A convolutional neural network (CNN) model trained to detect lung cancer from medical imaging data, achieving high accuracy in classification.",
+    tags: ["Python", "TensorFlow", "Keras"],
+    imageUrl: "https://picsum.photos/400/300?random=5",
+    link: "https://github.com/Ayush9791/CNNdetection",
+    type: 'FINISHED',
+  },
+  {
+    id: 6,
+    badge: ["web", "Finished"],
+    title: "Mealio: A food redistribution platform",
+    description: "A web application that connects restaurants with surplus food to local charities, facilitating food donations and reducing waste.",
+    tags: ["React", "Node.js", "MongoDB", "Express"],
+    imageUrl: "https://picsum.photos/400/300?random=6",
+    link: "https://github.com/Ayush9791/mealio",
+    type: 'FINISHED',
+  }
 ];
 
 export const SKILLS: Skill[] = [
