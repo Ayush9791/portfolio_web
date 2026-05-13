@@ -35,11 +35,10 @@ export const PROJECTS: Project[] = [
     tags: ["JavaScript", "HTML", "CSS"],
     imageUrl: "https://picsum.photos/400/300?random=3",
     link: "",
-    type: 'FINISHED',
-  }
-  ,
+    type: 'FINISHED', 
+  },
   {
-    id: 4,
+    id: 4, 
     badge: ["web", "Active Quest"],
     title: "Amazon Clone",
     description: "A full-stack Amazon clone built with React for the frontend and Node.js for the backend, featuring user authentication, product listings, and a shopping cart.",
@@ -67,7 +66,47 @@ export const PROJECTS: Project[] = [
     imageUrl: "https://picsum.photos/400/300?random=6",
     link: "https://github.com/Ayush9791/mealio",
     type: 'FINISHED',
-  }
+  },
+  {
+    id: 7,
+    badge: ["Web", "Finished"],
+    title: "DB Detective: A database mystery game",
+    description: "A browser-based detective mystery game where players solve cases by exploring clues stored in a live PostgreSQL database. Game logic runs entirely client-side with Supabase for user registration and session tracking.",
+    tags: ["HTML", "CSS", "JavaScript", "PostgreSQL", "Supabase"],
+    imageUrl: "https://picsum.photos/400/300?random=7",
+    link: "https://github.com/Ayush9791/dbdetective",
+    type: 'FINISHED',
+  },
+  {
+    id: 8,
+    badge: ["AI", "Active Quest"],
+    title: "AI Internship & Job Tracker",
+    description: "An agentic AI system that autonomously tracks internship and job listings, matches opportunities to a user profile, and sends personalized application reminders. Built with a multi-step agent pipeline featuring tool-augmented search, memory management, and decision-making logic.",
+    tags: ["Python", "LangChain", "Claude API", "React", "PostgreSQL"],
+    imageUrl: "https://picsum.photos/400/300?random=8",
+    link: "",
+    type: 'ACTIVE QUEST',
+  },
+  {
+    id: 9,
+    badge: ["discord", "Finished"],
+    title: "CricBot: Live cricket score Discord bot",
+    description: "A Discord bot serving live cricket scorecard updates, ICC rankings, and player statistics to active servers using the Cricbuzz API via RapidAPI. Features modular command architecture with robust error handling and rate-limit management.",
+    tags: ["Python", "discord.py", "Cricbuzz API"],
+    imageUrl: "https://picsum.photos/400/300?random=9",
+    link: "https://github.com/Ayush9791/cricket_webhook",
+    type: 'FINISHED',
+  },
+  {
+    id: 10,
+    badge: ["AI", "Finished"],
+    title: "Screen Sentinel: Privacy protection desktop app",
+    description: "A cross-platform desktop application that detects hidden spyware and unauthorised camera/microphone access, protecting user privacy with real-time background monitoring. Submitted at HackHazard '25, competing against 100+ teams nationally.",
+    tags: ["Electron.js", "JavaScript", "Screenpipe"],
+    imageUrl: "https://picsum.photos/400/300?random=10",
+    link: "",
+    type: 'FINISHED',
+  },
 ];
 
 export const SKILLS: Skill[] = [
@@ -85,9 +124,14 @@ export const SKILLS: Skill[] = [
   { name: "Pandas", level: 4, icon: "🐼", category: 'AI / ML' },
   { name: "Scikit-learn", level: 4, icon: "🔬", category: 'AI / ML' },
   { name: "TensorFlow / Keras", level: 4, icon: "🧠", category: 'AI / ML' },
+  { name: "LangChain", level: 3, icon: "🔗", category: 'AI / ML' },
+  { name: "Claude API", level: 4, icon: "🤖", category: 'AI / ML' },
+  { name: "Prompt Engineering", level: 4, icon: "✍️", category: 'AI / ML' },
 
   // Tools
   { name: "Git", level: 4, icon: "🌿", category: 'Tools' },
   { name: "GitHub", level: 5, icon: "🐙", category: 'Tools' },
   { name: "VS Code", level: 5, icon: "💻", category: 'Tools' },
+  { name: "Figma", level: 4, icon: "🎭", category: 'Tools' },
+  { name: "Supabase", level: 3, icon: "⚡", category: 'Tools' },
 ];

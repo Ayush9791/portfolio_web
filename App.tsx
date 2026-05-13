@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail, Pickaxe, User, CheckCircle, Trophy, Sun, Moon, Flame } from 'lucide-react';
+import { Menu, X, Github as GithubIcon, Linkedin as LinkedinIcon, Mail, Pickaxe, User, CheckCircle, Trophy, Sun, Moon, Flame } from 'lucide-react';
 import { PROJECTS, SKILLS, PROFILE } from './constants';
 import ChatBot from './components/ChatBot';
 import MinecraftButton from './components/MinecraftButton';
@@ -14,7 +14,7 @@ type Theme = 'overworld' | 'nether';
 export function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [projectFilter, setProjectFilter] = useState<'All' | 'ACTIVE QUEST' | 'FINISHED'>('All');
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [theme, setTheme] = useState<Theme>('overworld');
   const [achievement, setAchievement] = useState<{ title: string; icon: React.ReactNode } | null>(null);
 
@@ -221,11 +221,11 @@ export function App() {
           </div>
           
           <div className="mt-12 flex justify-center gap-6">
-            <a href="https://github.com/Ayush9791" onClick={() => triggerAchievement('Open Source Contributor', <Github className="text-white" />)} className="transform hover:scale-110 hover:-translate-y-1 transition-all duration-200 bg-[#333] p-3 border-2 border-gray-500 hover:border-yellow-400 group shadow-lg active:scale-95">
-              <Github size={32} className="group-hover:text-white transition-colors" />
+            <a href="https://github.com/Ayush9791" onClick={() => triggerAchievement('Open Source Contributor', <GithubIcon className="text-white" />)} className="transform hover:scale-110 hover:-translate-y-1 transition-all duration-200 bg-[#333] p-3 border-2 border-gray-500 hover:border-yellow-400 group shadow-lg active:scale-95">
+              <GithubIcon size={32} className="group-hover:text-white transition-colors" />
             </a>
-            <a href="https://www.linkedin.com/in/ayush-deep979/" onClick={() => triggerAchievement('Networking Expert', <Linkedin className="text-white" />)} className="transform hover:scale-110 hover:-translate-y-1 transition-all duration-200 bg-[#0077b5] p-3 border-2 border-blue-300 hover:border-white group shadow-lg active:scale-95">
-              <Linkedin size={32} className="group-hover:text-white transition-colors" />
+            <a href="https://www.linkedin.com/in/ayush-deep979/" onClick={() => triggerAchievement('Networking Expert', <LinkedinIcon className="text-white" />)} className="transform hover:scale-110 hover:-translate-y-1 transition-all duration-200 bg-[#0077b5] p-3 border-2 border-blue-300 hover:border-white group shadow-lg active:scale-95">
+              <LinkedinIcon size={32} className="group-hover:text-white transition-colors" />
             </a>
             <a href="mailto:aayushdeep979@gmail.com" onClick={() => triggerAchievement('Message Sent', <Mail className="text-white" />)} className="transform hover:scale-110 hover:-translate-y-1 transition-all duration-200 bg-[#ea4335] p-3 border-2 border-red-300 hover:border-white group shadow-lg active:scale-95">
               <Mail size={32} className="group-hover:text-white transition-colors" />
