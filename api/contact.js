@@ -7,9 +7,18 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
+  const ip =
+    req.headers["x-forwarded-for"]?.split(",")[0]?.trim() ||
+    req.socket?.remoteAddress ||
+    "Unknown";
+
+  const country = req.headers["x-vercel-ip-country"] || "Unknown";
+  const region = req.headers["x-vercel-ip-country-region"] || "Unknown";
+  const city = req.headers["x-vercel-ip-city"] || "Unknown";
+  const userAgent = req.headers["user-agent"] || "Unknown";
+
   const { name, email, message } = req.body || {};
 
-  // Basic validation
   if (!name || !email || !message) {
     return res.status(400).json({ error: "Missing fields" });
   }
@@ -27,6 +36,12 @@ export default async function handler(req, res) {
       text: `
 Name: ${name}
 Email: ${email}
+
+IP: ${ip}
+Country: ${country}
+Region: ${region}
+City: ${city}
+User Agent: ${userAgent}
 
 Message:
 ${message}
