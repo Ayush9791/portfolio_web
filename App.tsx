@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Github as GithubIcon, Linkedin as LinkedinIcon, Mail, Pickaxe, User, CheckCircle, Sun, Moon, Flame } from 'lucide-react';
 import { PROJECTS, SKILLS, PROFILE } from './constants';
-import ChatBot from './components/ChatBot';
+import { BLOG_POSTS } from './blogPosts';
 import MinecraftButton from './components/MinecraftButton';
 import { TypingText } from './components/TypingText';
 import { ExperienceOrbs } from './components/ExperienceOrbs';
@@ -129,7 +129,7 @@ export function App() {
             
             <div className="hidden md:flex items-center gap-6">
               <div className="ml-10 flex items-baseline space-x-8 text-xl">
-                {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
+                {['About', 'Skills', 'Projects', 'Blog', 'Contact'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
@@ -171,7 +171,7 @@ export function App() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#2b2b2b] border-b-4 border-black animate-in slide-in-from-top-10 duration-200">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-xl">
-               {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
+               {['About', 'Skills', 'Projects', 'Blog', 'Contact'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
@@ -394,6 +394,38 @@ export function App() {
          </div>
       </section>
 
+      {/* Developer Blog / Dev Logs */}
+      <section id="blog" className="py-20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className={`text-5xl inline-block border-4 border-black px-8 py-2 text-white shadow-[8px_8px_0_rgba(0,0,0,0.5)] transform -rotate-1 hover:rotate-0 transition-transform duration-300 ${theme === 'overworld' ? 'bg-[#8B4513]' : 'bg-[#5c0000]'}`}>
+              Dev Logs
+            </h2>
+            <p className="text-xl text-gray-200 mt-5">Build notes, experiments, and lessons from projects in progress.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {BLOG_POSTS.map((post) => (
+              <article key={post.slug} className="bg-[#f4e7bd] text-[#2d2119] border-4 border-black shadow-[6px_6px_0_rgba(0,0,0,0.5)] p-5 flex flex-col">
+                <p className="text-base text-[#655344] mb-2">{new Date(post.date + 'T12:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</p>
+                <h3 className="text-3xl font-bold leading-tight mb-3">{post.title}</h3>
+                <p className="text-xl leading-tight mb-4 flex-grow">{post.summary}</p>
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {post.tags.map((tag) => (
+                    <span key={tag} className="bg-[#d1c3a0] border border-[#87765d] px-2 py-1 text-base">{tag}</span>
+                  ))}
+                </div>
+                <a href={post.url} className="block text-center bg-[#588d3e] hover:bg-[#6ab04c] text-white border-2 border-[#2e4b21] px-4 py-2 text-2xl transition-colors">
+                  Read Dev Log →
+                </a>
+              </article>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <a href="/blog/" className="inline-block bg-[#7d7d7d] hover:bg-[#9e9e9e] text-white border-4 border-[#424242] px-6 py-2 text-2xl">Open Blog Archive</a>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-20 relative">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -483,7 +515,6 @@ export function App() {
         </p>
       </footer>
 
-      <ChatBot />
     </div>
   );
 }

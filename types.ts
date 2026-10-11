@@ -15,7 +15,3 @@ export interface Skill {
   category: 'Web' | 'AI / ML' | 'Tools';
 }
 
-export interface ChatMessage {
-  role: 'user' | 'model';
-  text: string;
-}
