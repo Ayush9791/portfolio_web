@@ -13,7 +13,7 @@ const MinecraftButton: React.FC<MinecraftButtonProps> = ({
   ...props 
 }) => {
   // Added duration-75 for snappy clicks, hover:-translate-y-0.5 for subtle lift
-  const baseStyle = "font-['VT323'] text-2xl px-6 py-3 border-b-4 border-r-4 active:border-b-0 active:border-r-0 active:mt-1 active:ml-1 transition-all duration-75 ease-out hover:-translate-y-0.5 hover:shadow-lg minecraft-shadow relative";
+  const baseStyle = "font-['VT323'] text-2xl px-6 py-3 border-b-4 border-r-4 active:border-b-0 active:border-r-0 active:mt-1 active:ml-1 transition-all duration-75 ease-out hover:-translate-y-0.5 hover:shadow-lg minecraft-shadow relative disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none";
   
   const variants = {
     primary: "bg-[#588d3e] border-[#2e4b21] text-white hover:bg-[#6ab04c]", // Grass Green
