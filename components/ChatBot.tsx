@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Bot } from 'lucide-react';
-import { ChatMessage } from '../types';
+import { X, Send, Bot } from 'lucide-react';
+import type { ChatMessage } from '../types';
 import { sendMessageToGemini } from '../services/geminiService';
 
 const ChatBot: React.FC = () => {
@@ -29,7 +29,7 @@ const ChatBot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const responseText = await sendMessageToGemini(userMsg.text);
+      const responseText = await sendMessageToGemini(userMsg.text, messages);
       setMessages(prev => [...prev, { role: 'model', text: responseText }]);
     } catch (error) {
       setMessages(prev => [...prev, { role: 'model', text: "Connection lost to the Overworld..." }]);
@@ -46,7 +46,7 @@ const ChatBot: React.FC = () => {
     <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end">
       {/* Chat Window */}
       {isOpen && (
-        <div className="mb-4 w-80 sm:w-96 bg-gray-800 border-4 border-gray-900 rounded-none shadow-xl flex flex-col font-['VT323'] text-lg animate-in fade-in slide-in-from-bottom-10 duration-200">
+        <div className="mb-4 w-[calc(100vw-2rem)] max-w-96 bg-gray-800 border-4 border-gray-900 rounded-none shadow-xl flex flex-col font-['VT323'] text-lg animate-in fade-in slide-in-from-bottom-10 duration-200">
           {/* Header */}
           <div className="bg-purple-700 p-2 border-b-4 border-gray-900 flex justify-between items-center text-white">
             <div className="flex items-center gap-2">
@@ -62,7 +62,7 @@ const ChatBot: React.FC = () => {
           </div>
 
           {/* Messages Area */}
-          <div className="h-80 overflow-y-auto p-4 bg-[#c6c6c6] bg-opacity-10 backdrop-blur-sm space-y-3">
+          <div className="h-80 overflow-y-auto p-4 bg-[#c6c6c6] bg-opacity-10 backdrop-blur-sm space-y-3" role="log" aria-live="polite" aria-label="Chat messages">
             {messages.map((msg, idx) => (
               <div 
                 key={idx} 
@@ -99,10 +99,13 @@ const ChatBot: React.FC = () => {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyPress}
               placeholder="Ask about my skills..."
+              maxLength={1000}
+              aria-label="Message for BlockyBot"
               className="flex-1 bg-gray-900 text-white border-2 border-gray-600 p-2 focus:outline-none focus:border-green-500 font-['VT323'] text-xl placeholder-gray-500"
             />
             <button 
               onClick={handleSend}
+              aria-label="Send message"
               disabled={isLoading}
               className={`
                 p-2 border-b-4 border-r-4 active:border-b-0 active:border-r-0 active:translate-x-1 active:translate-y-1 transition-all
@@ -119,6 +122,8 @@ const ChatBot: React.FC = () => {
       {!isOpen && (
         <button 
           onClick={() => setIsOpen(true)}
+          aria-label="Open BlockyBot chat"
+          aria-expanded={isOpen}
           className="bg-green-600 hover:bg-green-500 text-white p-4 rounded-none border-b-4 border-r-4 border-green-800 shadow-lg active:mt-1 active:ml-1 active:border-b-0 active:border-r-0 transition-all duration-75 flex items-center gap-2 minecraft-shadow hover:-translate-y-1"
         >
           <Bot size={24} />

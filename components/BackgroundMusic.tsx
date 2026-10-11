@@ -28,17 +28,22 @@ export const BackgroundMusic: React.FC = () => {
     }
   }, [volume, isMuted]);
 
-  const togglePlay = () => {
+  const togglePlay = async () => {
     if (!audioRef.current) return;
 
     if (isPlaying) {
       audioRef.current.pause();
-    } else {
-      // Browsers require interaction to play audio. 
-      // Since this is triggered by a click, it will work.
-      audioRef.current.play().catch(e => console.log("Audio play failed:", e));
+      setIsPlaying(false);
+      return;
     }
-    setIsPlaying(!isPlaying);
+
+    try {
+      await audioRef.current.play();
+      setIsPlaying(true);
+    } catch (error) {
+      console.warn("Audio playback was blocked:", error);
+      setIsPlaying(false);
+    }
   };
 
   return (
@@ -68,6 +73,7 @@ export const BackgroundMusic: React.FC = () => {
             minecraft-shadow active:translate-y-1 active:shadow-none
           `}
           title={isPlaying ? "Stop Music" : "Play Music"}
+          aria-label={isPlaying ? "Pause background music" : "Play background music"}
         >
           <div className={`relative ${isPlaying ? 'animate-spin-slow' : ''}`}>
              <Disc 

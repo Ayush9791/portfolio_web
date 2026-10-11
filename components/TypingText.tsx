@@ -5,43 +5,40 @@ const phrases = [
   "AI Specialist",
   "Redstone Engineer",
   "Problem Solver",
-  "Code Crafter"
+  "Code Crafter",
 ];
 
 export const TypingText: React.FC = () => {
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(150);
 
   useEffect(() => {
-    const handleTyping = () => {
-      const currentPhrase = phrases[currentPhraseIndex];
-      
-      if (isDeleting) {
-        setDisplayText(currentPhrase.substring(0, displayText.length - 1));
-        setTypingSpeed(50);
-      } else {
-        setDisplayText(currentPhrase.substring(0, displayText.length + 1));
-        setTypingSpeed(150);
-      }
+    const currentPhrase = phrases[currentPhraseIndex];
+    let timer: ReturnType<typeof setTimeout> | undefined;
 
-      if (!isDeleting && displayText === currentPhrase) {
-        setTimeout(() => setIsDeleting(true), 2000);
-      } else if (isDeleting && displayText === "") {
-        setIsDeleting(false);
-        setCurrentPhraseIndex((prev) => (prev + 1) % phrases.length);
-      }
+    if (!isDeleting && displayText === currentPhrase) {
+      timer = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayText === "") {
+      setIsDeleting(false);
+      setCurrentPhraseIndex((previous) => (previous + 1) % phrases.length);
+    } else {
+      const nextLength = displayText.length + (isDeleting ? -1 : 1);
+      timer = setTimeout(
+        () => setDisplayText(currentPhrase.substring(0, nextLength)),
+        isDeleting ? 50 : 150,
+      );
+    }
+
+    return () => {
+      if (timer) clearTimeout(timer);
     };
-
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [displayText, isDeleting, currentPhraseIndex, typingSpeed]);
+  }, [currentPhraseIndex, displayText, isDeleting]);
 
   return (
-    <span className="text-yellow-400">
+    <span className="text-yellow-400" aria-live="polite">
       {displayText}
-      <span className="cursor-blink text-white">_</span>
+      <span className="cursor-blink text-white" aria-hidden="true">_</span>
     </span>
   );
 };
