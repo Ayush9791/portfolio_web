@@ -8,6 +8,7 @@ import { ExperienceOrbs } from './components/ExperienceOrbs';
 import { AchievementToast } from './components/AchievementToast';
 import { ClickParticles } from './components/ClickParticles';
 import { BackgroundMusic } from './components/BackgroundMusic';
+import { GitHubActivity } from './components/GitHubActivity';
 
 type Theme = 'overworld' | 'nether';
 
@@ -52,7 +53,7 @@ export function App() {
   };
 
   const filteredProjects = PROJECTS.filter(p => projectFilter === 'All' || p.type === projectFilter);
-  const visibleProjects = showAllProjects || projectFilter !== 'All' ? filteredProjects : filteredProjects.slice(0, 4);
+  const visibleProjects = showAllProjects ? filteredProjects : filteredProjects.slice(0, 4);
 
   // Group skills by category
   const skillsByCategory = {
@@ -285,6 +286,31 @@ export function App() {
         </div>
       </section>
 
+      {/* Now Building */}
+      <section id="building" className="py-16 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className={`text-5xl inline-block border-4 border-black px-8 py-2 text-white shadow-[8px_8px_0_rgba(0,0,0,0.5)] ${theme === 'overworld' ? 'bg-[#8B4513]' : 'bg-[#5c0000]'}`}>Now Building</h2>
+            <p className="text-xl text-gray-200 mt-5">Current experiments and projects in active development.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { title: 'ParkinsonAI (PENScan)', stage: 'Research & feature engineering', detail: 'Preprocessing spiral and meander drawings and evaluating interpretable machine-learning features.', tags: ['Python', 'OpenCV', 'Machine Learning'] },
+              { title: 'LearnTrack Pro', stage: 'Product development', detail: 'A learning tracker for playlist-based study goals, session tracking, and progress history.', tags: ['Next.js', 'Supabase', 'YouTube API'] },
+              { title: 'AI Internship & Job Tracker', stage: 'Agent workflow development', detail: 'Exploring a workflow that finds opportunities, matches them to a profile, and helps organize applications.', tags: ['Python', 'LLMs', 'Automation'] },
+            ].map((item) => (
+              <article key={item.title} className="bg-[#c6c6c6] text-black border-4 border-black p-5 shadow-[6px_6px_0_rgba(0,0,0,0.5)]">
+                <p className="text-[#246b22] text-lg font-bold mb-2">IN PROGRESS</p>
+                <h3 className="text-3xl font-bold mb-3">{item.title}</h3>
+                <p className="text-[#5c4033] text-lg font-bold mb-3">{item.stage}</p>
+                <p className="text-xl leading-tight mb-4">{item.detail}</p>
+                <div className="flex flex-wrap gap-2">{item.tags.map(tag => <span key={tag} className="bg-[#8b8b8b] border-2 border-[#555] px-2 py-1 text-lg">{tag}</span>)}</div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
       <section id="projects" className="py-20 relative">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -311,9 +337,9 @@ export function App() {
               <option value="FINISHED">Completed ({PROJECTS.filter(p => p.type === 'FINISHED').length})</option>
             </select>
             <p className="text-gray-200 text-lg text-center sm:text-left" aria-live="polite">
-              {projectFilter === 'All' && !showAllProjects
-                ? `Showing 4 featured projects of ${filteredProjects.length}`
-                : `Showing ${filteredProjects.length} project${filteredProjects.length === 1 ? '' : 's'}`}
+              {showAllProjects
+                ? `Showing all ${filteredProjects.length} matching projects`
+                : `Showing ${Math.min(4, filteredProjects.length)} of ${filteredProjects.length} matching projects`}
             </p>
           </div>
 
@@ -380,14 +406,14 @@ export function App() {
               </div>
             ))}
           </div>
-          {projectFilter === 'All' && filteredProjects.length > 4 && (
+          {filteredProjects.length > 4 && (
             <div className="mt-10 flex justify-center">
               <MinecraftButton
                 variant={theme === 'overworld' ? 'secondary' : 'danger'}
                 onClick={() => setShowAllProjects(value => !value)}
                 aria-expanded={showAllProjects}
               >
-                {showAllProjects ? 'Show Featured Projects' : `View All ${filteredProjects.length} Projects`}
+                {showAllProjects ? 'Show Featured Projects' : `View All ${filteredProjects.length} Matching Projects`}
               </MinecraftButton>
             </div>
           )}
@@ -423,6 +449,18 @@ export function App() {
           <div className="text-center mt-8">
             <a href="/blog/" className="inline-block bg-[#7d7d7d] hover:bg-[#9e9e9e] text-white border-4 border-[#424242] px-6 py-2 text-2xl">Open Blog Archive</a>
           </div>
+        </div>
+      </section>
+
+      {/* GitHub Activity */}
+      <section id="github-activity" className="py-16 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className={`text-5xl inline-block border-4 border-black px-8 py-2 text-white shadow-[8px_8px_0_rgba(0,0,0,0.5)] ${theme === 'overworld' ? 'bg-[#588d3e]' : 'bg-[#800000]'}`}>GitHub Activity</h2>
+            <p className="text-xl text-gray-200 mt-5">Recent public events from my GitHub profile.</p>
+          </div>
+          <GitHubActivity />
+          <div className="text-center mt-8"><a href="https://github.com/Ayush9791" target="_blank" rel="noopener noreferrer" className="inline-block bg-[#292929] hover:bg-[#444] text-white border-4 border-black px-6 py-2 text-2xl">View GitHub Profile →</a></div>
         </div>
       </section>
 
