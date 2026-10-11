@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Github as GithubIcon, Linkedin as LinkedinIcon, Mail, Pickaxe, User, CheckCircle, Sun, Moon, Flame } from 'lucide-react';
 import { PROJECTS, SKILLS, PROFILE } from './constants';
 import { BLOG_POSTS } from './blogPosts';
-import ChatBot from './components/ChatBot';
 import MinecraftButton from './components/MinecraftButton';
 import { TypingText } from './components/TypingText';
 import { ExperienceOrbs } from './components/ExperienceOrbs';
@@ -516,7 +515,6 @@ export function App() {
         </p>
       </footer>
 
-      <ChatBot />
     </div>
   );
 }
