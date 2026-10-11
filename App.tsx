@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Github as GithubIcon, Linkedin as LinkedinIcon, Mail, Pickaxe, User, CheckCircle, Trophy, Sun, Moon, Flame } from 'lucide-react';
+import { Menu, X, Github as GithubIcon, Linkedin as LinkedinIcon, Mail, Pickaxe, User, CheckCircle, Sun, Moon, Flame } from 'lucide-react';
 import { PROJECTS, SKILLS, PROFILE } from './constants';
 import ChatBot from './components/ChatBot';
 import MinecraftButton from './components/MinecraftButton';
@@ -122,7 +122,7 @@ export function App() {
               <div className={`w-8 h-8 border-2 flex items-center justify-center transition-all duration-300 group-hover:rotate-12 ${theme === 'overworld' ? 'bg-green-600 border-green-800 hover:bg-green-500' : 'bg-red-700 border-red-900 hover:bg-red-600'}`}>
                  <span className="font-bold text-lg">S</span>
               </div>
-              <span className="text-2xl tracking-widest text-yellow-400 drop-shadow-md group-hover:scale-105 transition-transform duration-200">AYUSHDEEP.SPACE</span>
+              <span className="text-base sm:text-2xl tracking-wide sm:tracking-widest text-yellow-400 drop-shadow-md group-hover:scale-105 transition-transform duration-200">AYUSHDEEP.SPACE</span>
             </div>
             
             <div className="hidden md:flex items-center gap-6">
@@ -193,7 +193,7 @@ export function App() {
         <div className={`z-10 bg-opacity-60 p-8 border-4 border-white backdrop-blur-sm max-w-4xl mx-auto transform hover:scale-[1.01] transition-transform duration-300 shadow-2xl ${theme === 'overworld' ? 'bg-black' : 'bg-[#1a0505]'}`}>
           <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-blue-400 to-purple-600 border-4 border-white shadow-xl flex items-center justify-center overflow-hidden animate-float">
              {PROFILE.imageUrl ? (
-               <img src={PROFILE.imageUrl} alt="Profile" className="w-full h-full object-cover" />
+               <img src={PROFILE.imageUrl} alt="Ayush Deep profile photo" className="w-full h-full object-cover" />
              ) : (
                <User size={64} className="text-white" />
              )}
@@ -205,8 +205,7 @@ export function App() {
              <TypingText />
           </h2>
           <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Crafting intelligent web applications and mining data for insights. 
-            Level 67 in  Python.
+            Building web applications, AI/ML projects, and developer tools with a focus on practical problem-solving.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <MinecraftButton 
@@ -294,13 +293,13 @@ export function App() {
           </div>
 
           {/* Filter Tabs */}
-          <div className="flex justify-center mb-12 gap-4">
+          <div className="flex flex-wrap justify-center mb-12 gap-2 px-2">
              {['All', 'ACTIVE QUEST', 'FINISHED'].map((filter) => (
                <button
                  key={filter}
                  onClick={() => setProjectFilter(filter as any)}
                  className={`
-                   font-['VT323'] text-2xl px-6 py-2 border-4 transition-all duration-200 ease-out
+                   font-['VT323'] text-xl sm:text-2xl px-3 sm:px-6 py-2 border-4 transition-all duration-200 ease-out
                    ${projectFilter === filter 
                      ? 'bg-blue-600 border-black text-white transform -translate-y-1 shadow-[4px_4px_0_rgba(0,0,0,0.5)]' 
                      : 'bg-[#7d7d7d] border-[#424242] text-gray-200 hover:bg-[#9e9e9e] hover:-translate-y-1'}
@@ -313,22 +312,35 @@ export function App() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 min-h-[500px]">
             {filteredProjects.map((project) => (
-              <div key={project.id} className="bg-[#c6c6c6] p-1 border-4 border-black shadow-[8px_8px_0_rgba(0,0,0,0.5)] hover:transform hover:-translate-y-2 hover:shadow-[12px_12px_0_rgba(0,0,0,0.5)] transition-all duration-300 animate-in fade-in zoom-in-95">
+              <div key={project.id} className="group bg-[#c6c6c6] p-1 border-4 border-black shadow-[8px_8px_0_rgba(0,0,0,0.5)] hover:transform hover:-translate-y-2 hover:shadow-[12px_12px_0_rgba(0,0,0,0.5)] transition-all duration-300 animate-in fade-in zoom-in-95">
                 <div className="border-4 border-[#ffffff] border-b-[#555555] border-r-[#555555] p-6 h-full flex flex-col">
           
-                  <div className="relative mb-6 group overflow-hidden border-4 border-black bg-black">
-                    <img 
-                      src={project.imageUrl} 
-                      alt={project.title} 
-                      className="w-full h-48 object-cover image-pixelated transform group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                    />
-                    <div className="absolute top-2 right-2 bg-black bg-opacity-80 text-yellow-400 px-3 py-1 border-2 border-yellow-600 font-bold">
+                  <div
+                    className="relative mb-6 h-48 overflow-hidden border-4 border-black flex items-center justify-center text-center p-5"
+                    role="img"
+                    aria-label={`${project.title} project cover`}
+                    style={{
+                      background: project.badge.some((badge) => badge.toLowerCase() === 'ai')
+                        ? 'linear-gradient(135deg, #312e81, #111827 70%)'
+                        : project.badge.some((badge) => badge.toLowerCase() === 'discord')
+                          ? 'linear-gradient(135deg, #5865F2, #23272A 75%)'
+                          : 'linear-gradient(135deg, #166534, #111827 75%)',
+                    }}
+                  >
+                    <div className="absolute inset-2 border-2 border-white/20 pointer-events-none" />
+                    <div className="relative z-10 max-w-full">
+                      <Pickaxe size={28} className="mx-auto mb-3 text-yellow-300" aria-hidden="true" />
+                      <p className="text-yellow-300 text-sm tracking-widest mb-2">PROJECT {String(project.id).padStart(2, '0')}</p>
+                      <p className="text-white text-2xl sm:text-3xl leading-tight font-bold drop-shadow-md">{project.title}</p>
+                      <p className="mt-3 text-white/75 text-lg">{project.tags.slice(0, 3).join(' · ')}</p>
+                    </div>
+                    <div className="absolute top-2 right-2 bg-black/80 text-yellow-300 px-2 py-1 border-2 border-yellow-600 text-sm font-bold">
                       {project.type}
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.badge.map((badge, i) => (
-                      <span key={i} className="text-xs px-2 py-1 bg-[#555555] text-black border-2 border-[#333333] hover:bg-white transition-colors cursor-default inline-block">
+                      <span key={i} className="text-xs px-2 py-1 bg-[#555555] text-white border-2 border-[#333333] hover:bg-[#777] transition-colors cursor-default inline-block">
                         {badge}
                       </span>
                     ))}
@@ -346,8 +358,16 @@ export function App() {
                     ))}
                   </div>
                   
-                  <MinecraftButton fullWidth variant={theme === 'overworld' ? 'primary' : 'danger'}>
-                    Open Project
+                  <MinecraftButton
+                    fullWidth
+                    variant={theme === 'overworld' ? 'primary' : 'danger'}
+                    disabled={!project.link}
+                    onClick={() => {
+                      if (project.link) window.open(project.link, '_blank', 'noopener,noreferrer');
+                    }}
+                    title={project.link ? `Open ${project.title} repository` : 'No public project link has been added yet'}
+                  >
+                    {project.link ? 'Open Repository' : project.type === 'ACTIVE QUEST' ? 'In Progress' : 'Repository Unavailable'}
                   </MinecraftButton>
                 </div>
               </div>
@@ -382,6 +402,7 @@ export function App() {
                    <label htmlFor="name" className="block text-2xl mb-2 font-bold text-[#5c4033]">Username</label>
                    <input 
                      required
+                     maxLength={100}
                      type="text" 
                      id="name"
                      name="name"
@@ -394,6 +415,7 @@ export function App() {
                    <label htmlFor="email" className="block text-2xl mb-2 font-bold text-[#5c4033]">Server Address (Email)</label>
                    <input 
                      required
+                     maxLength={254}
                      type="email" 
                      id="email"
                       name="email"
@@ -406,6 +428,7 @@ export function App() {
                    <label htmlFor="message" className="block text-2xl mb-2 font-bold text-[#5c4033]">Message</label>
                    <textarea 
                      required
+                     maxLength={3000}
                      id="message"
                      name="message"
                      rows={4}
@@ -414,6 +437,11 @@ export function App() {
                    ></textarea>
                  </div>
                  
+                 {formStatus === 'error' && (
+                   <p role="alert" className="text-lg text-red-700 font-bold" aria-live="polite">
+                     The message could not be sent. Please try again or email aayushdeep979@gmail.com directly.
+                   </p>
+                 )}
                  <div className="text-right">
                     <button 
                       type="submit" 
