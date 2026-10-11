@@ -46,7 +46,8 @@ export function App() {
   // Smooth scroll handler
   const scrollToSection = (id: string) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
+    const targetId = id === 'github activity' ? 'github-activity' : id;
+    const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
@@ -129,8 +130,8 @@ export function App() {
             </div>
             
             <div className="hidden md:flex items-center gap-6">
-              <div className="ml-10 flex items-baseline space-x-8 text-xl">
-                {['About', 'Skills', 'Projects', 'Blog', 'Contact'].map((item) => (
+              <div className="ml-10 flex items-baseline space-x-4 text-lg">
+                {['About', 'Skills', 'Projects', 'Building', 'GitHub Activity', 'Blog', 'Contact'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
