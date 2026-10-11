@@ -172,7 +172,7 @@ export function App() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#2b2b2b] border-b-4 border-black animate-in slide-in-from-top-10 duration-200">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-xl">
-               {['About', 'Skills', 'Projects', 'Contact'].map((item) => (
+               {['About', 'Skills', 'Projects', 'Blog', 'Contact'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item.toLowerCase())}
