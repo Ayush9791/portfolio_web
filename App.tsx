@@ -14,6 +14,7 @@ type Theme = 'overworld' | 'nether';
 export function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [projectFilter, setProjectFilter] = useState<'All' | 'ACTIVE QUEST' | 'FINISHED'>('All');
+  const [showAllProjects, setShowAllProjects] = useState(false);
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [theme, setTheme] = useState<Theme>('overworld');
   const [achievement, setAchievement] = useState<{ title: string; icon: React.ReactNode } | null>(null);
@@ -51,6 +52,7 @@ export function App() {
   };
 
   const filteredProjects = PROJECTS.filter(p => projectFilter === 'All' || p.type === projectFilter);
+  const visibleProjects = showAllProjects || projectFilter !== 'All' ? filteredProjects : filteredProjects.slice(0, 4);
 
   // Group skills by category
   const skillsByCategory = {
@@ -292,26 +294,31 @@ export function App() {
             </h2>
           </div>
 
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap justify-center mb-12 gap-2 px-2">
-             {['All', 'ACTIVE QUEST', 'FINISHED'].map((filter) => (
-               <button
-                 key={filter}
-                 onClick={() => setProjectFilter(filter as any)}
-                 className={`
-                   font-['VT323'] text-xl sm:text-2xl px-3 sm:px-6 py-2 border-4 transition-all duration-200 ease-out
-                   ${projectFilter === filter 
-                     ? 'bg-blue-600 border-black text-white transform -translate-y-1 shadow-[4px_4px_0_rgba(0,0,0,0.5)]' 
-                     : 'bg-[#7d7d7d] border-[#424242] text-gray-200 hover:bg-[#9e9e9e] hover:-translate-y-1'}
-                 `}
-               >
-                 {filter}
-               </button>
-             ))}
+          {/* Compact project filters */}
+          <div className="max-w-3xl mx-auto mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+            <label htmlFor="project-filter" className="text-xl text-white">Filter quests</label>
+            <select
+              id="project-filter"
+              value={projectFilter}
+              onChange={(event) => {
+                setProjectFilter(event.target.value as 'All' | 'ACTIVE QUEST' | 'FINISHED');
+                setShowAllProjects(false);
+              }}
+              className="font-['VT323'] text-xl bg-[#292929] text-white border-4 border-[#777] px-4 py-2 focus:outline-none focus:border-yellow-400"
+            >
+              <option value="All">All projects ({PROJECTS.length})</option>
+              <option value="ACTIVE QUEST">In progress ({PROJECTS.filter(p => p.type === 'ACTIVE QUEST').length})</option>
+              <option value="FINISHED">Completed ({PROJECTS.filter(p => p.type === 'FINISHED').length})</option>
+            </select>
+            <p className="text-gray-200 text-lg text-center sm:text-left" aria-live="polite">
+              {projectFilter === 'All' && !showAllProjects
+                ? `Showing 4 featured projects of ${filteredProjects.length}`
+                : `Showing ${filteredProjects.length} project${filteredProjects.length === 1 ? '' : 's'}`}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 min-h-[500px]">
-            {filteredProjects.map((project) => (
+            {visibleProjects.map((project) => (
               <div key={project.id} className="group bg-[#c6c6c6] p-1 border-4 border-black shadow-[8px_8px_0_rgba(0,0,0,0.5)] hover:transform hover:-translate-y-2 hover:shadow-[12px_12px_0_rgba(0,0,0,0.5)] transition-all duration-300 animate-in fade-in zoom-in-95">
                 <div className="border-4 border-[#ffffff] border-b-[#555555] border-r-[#555555] p-6 h-full flex flex-col">
           
@@ -373,6 +380,17 @@ export function App() {
               </div>
             ))}
           </div>
+          {projectFilter === 'All' && filteredProjects.length > 4 && (
+            <div className="mt-10 flex justify-center">
+              <MinecraftButton
+                variant={theme === 'overworld' ? 'secondary' : 'danger'}
+                onClick={() => setShowAllProjects(value => !value)}
+                aria-expanded={showAllProjects}
+              >
+                {showAllProjects ? 'Show Featured Projects' : `View All ${filteredProjects.length} Projects`}
+              </MinecraftButton>
+            </div>
+          )}
          </div>
       </section>
 
