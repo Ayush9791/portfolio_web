@@ -4,7 +4,6 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
-  imageUrl: string;
   link: string;
   type: 'ACTIVE QUEST' | 'FINISHED';
 }
