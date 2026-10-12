@@ -1,6 +1,6 @@
 ---
 title: "Preparing Spiral Drawings for Parkinson's Screening"
-date: "2026-10-11"
+date: "11-10-2026"
 summary: "Notes on building a repeatable image-preprocessing pipeline for a handwriting-based Parkinson's screening project."
 tags: ["AI/ML", "Python", "Computer Vision"]
 project: "ParkinsonAI"

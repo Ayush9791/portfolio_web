@@ -1,6 +1,6 @@
 ---
 title: "Making a Developer Portfolio Easier to Explore"
-date: "2026-10-11"
+date: "11-10-2026"
 summary: "Why I am moving from a long project list toward featured work, dedicated project pages, and technical build notes."
 tags: ["Web Development", "SEO", "Portfolio"]
 project: "portfolio_web"

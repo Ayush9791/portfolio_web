@@ -1,6 +1,6 @@
 ---
 title: "Released Wi-Deck"
-date: "2026-10-12"
+date: "12-10-2026"
 summary: "Light weight stream deck alternative"
 tags: ["Android", "Java", "Desktop", "Productivity"]
 project: "Wi Deck"

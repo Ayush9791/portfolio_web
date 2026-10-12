@@ -1,6 +1,6 @@
 ---
 title: "Building a Local-First Android Study Timer"
-date: "2026-10-11"
+date: "11-10-2026"
 summary: "Design choices behind a simple Android study timer that records sessions locally instead of requiring an account."
 tags: ["Android", "Kotlin", "Productivity"]
 project: "timer"
