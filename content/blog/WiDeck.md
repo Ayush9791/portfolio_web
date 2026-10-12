@@ -1,7 +1,7 @@
 ---
 title: "Released Wi-Deck"
 date: "12-10-2026"
-summary: "Light weight stream deck alternative"
+summary: "A lightweight Android-to-Windows Stream Deck alternative that lets you launch apps and control your PC’s volume over a local network"
 tags: ["Android", "Java", "Desktop", "Productivity"]
 project: "Wi Deck"
 status: "published"
