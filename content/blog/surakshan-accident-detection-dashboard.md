@@ -1,6 +1,6 @@
 ---
 title: "From Accident Detection Model to a Reviewable Emergency Dashboard"
-date: "2026--10-30"
+date: "2026-10-30"
 summary: "How I approached connecting a computer-vision accident classifier to a web dashboard, including evidence capture and the limits of a prototype."
 tags: ["Python", "Computer Vision", "FastAPI", "Next.js", "AI/ML"]
 project: "Surakshan"
