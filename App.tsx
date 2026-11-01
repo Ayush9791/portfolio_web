@@ -126,7 +126,7 @@ export function App() {
               <div className="w-8 h-8 border-2 border-green-800 overflow-hidden transition-all duration-300 group-hover:rotate-12">
                 <img src="/favicon.svg" alt="" aria-hidden="true" className="w-full h-full object-cover" />
               </div>
-              <span className="text-base sm:text-2xl tracking-wide sm:tracking-widest text-yellow-400 drop-shadow-md group-hover:scale-105 transition-transform duration-200">AYUSHDEEP.SPACE</span>
+              <span className="text-base sm:text-2xl tracking-wide sm:tracking-widest text-yellow-400 drop-shadow-md group-hover:scale-105 transition-transform duration-200">AYUSH DEEP</span>
             </div>
             
             <div className="hidden md:flex items-center gap-6">
@@ -431,7 +431,7 @@ export function App() {
             <p className="text-xl text-gray-200 mt-5">Build notes, experiments, and lessons from projects in progress.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {BLOG_POSTS.map((post) => (
+            {BLOG_POSTS.slice(0, 3).map((post) => (
               <article key={post.slug} className="bg-[#f4e7bd] text-[#2d2119] border-4 border-black shadow-[6px_6px_0_rgba(0,0,0,0.5)] p-5 flex flex-col">
                 <p className="text-base text-[#655344] mb-2">{new Date(post.date + 'T12:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' })}</p>
                 <h3 className="text-3xl font-bold leading-tight mb-3">{post.title}</h3>
